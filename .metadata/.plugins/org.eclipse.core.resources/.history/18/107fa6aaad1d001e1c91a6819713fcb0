@@ -1,0 +1,30 @@
+package cofrinho;
+
+import java.util.ArrayList;
+
+public class Cofre {
+
+	private ArrayList<Moeda> ListaMoedas;
+	
+	public Cofre() {
+		this.ListaMoedas = new ArrayList<>();
+	}
+	
+	public void adicionar(Moeda moeda) {
+		this.ListaMoedas.add(moeda);
+	}
+	
+	public void listagemMoedas() {
+		
+		if(this.ListaMoedas.isEmpty()) {
+			System.out.println("Nao tem moedas no cofre");
+			return;
+		}
+		
+		for(Moeda moeda :this.ListaMoedas) {
+			moeda.info();
+		}
+	}
+	
+	
+}

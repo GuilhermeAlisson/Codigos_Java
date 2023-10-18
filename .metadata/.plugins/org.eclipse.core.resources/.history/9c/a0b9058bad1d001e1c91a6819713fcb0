@@ -1,0 +1,74 @@
+package cofrinho;
+
+import java.util.Scanner;
+
+public class Menu {
+	
+	private Scanner sca;
+	private Cofre cofre;
+	
+	public Menu() {
+		sca = new Scanner(System.in);
+		cofre = new Cofre();
+	}
+	
+	public void ExibirMenu() {
+		System.out.println("Cofrinho");
+		System.out.println("1 - Adicionar Moeda");
+		System.out.println("2 - Remover Moeda");
+		System.out.println("3 - Listar Moedas");
+		System.out.println("4 - Calcular valor total convertido para real:");
+		System.out.println("0 - Encerrar");
+
+		String selecionarOpcao = sca.next();
+		
+		switch(selecionarOpcao) {
+			case "0":
+				System.out.println("Encerrando o programa");
+				break;
+			case "1":
+				subMenuAdicionarMoedas();
+				ExibirMenu();
+				break;
+				
+			case "3":
+				cofre.listagemMoedas();
+				ExibirMenu();
+				break;
+			default:
+				System.out.println("Opção invalida!");
+				ExibirMenu();
+				break;
+					
+		//1:16
+		} 
+	}
+	private void subMenuAdicionarMoedas() {
+		System.out.println("Escolha uma Moeda:\n"
+				+ "1 - Real\n"
+				+ "2 - Dolar\n"
+				+ "3 - Euro");
+		int opcaoMoeda = sca.nextInt();
+		System.out.println("Digite o valor:");
+		
+		String valorTextoMoeda = sca.next();
+		valorTextoMoeda = valorTextoMoeda.replace(",",".");
+		double valorMoeda = Double.valueOf(valorTextoMoeda);
+		
+		Moeda moeda = null;
+		
+		if(opcaoMoeda == 1) {
+			moeda = new Real(valorMoeda);
+		} else if(opcaoMoeda == 2) {
+			 moeda = new Dolar(valorMoeda);
+		} else if (opcaoMoeda == 3) {
+			 moeda = new Euro(valorMoeda);
+		}else {
+			System.out.println("Voce escolheu uma moeda que neo exite!");
+			ExibirMenu();
+		}
+		cofre.adicionar(moeda);
+		System.out.println("Moeda foi adicionada!");
+		
+	}
+}
